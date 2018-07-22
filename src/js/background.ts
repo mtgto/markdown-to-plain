@@ -1,5 +1,11 @@
 import maildown from "@anydown/maildown";
-import { contextMenuId, PlainTextMessage } from "./common";
+import {
+    contextMenuId,
+    ConvertToPlainRequestMessage,
+    ConvertToPlainResponseMessage,
+    Id,
+    PlainTextMessage,
+} from "./common";
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
@@ -18,9 +24,24 @@ chrome.contextMenus.onClicked.addListener((info, tab?) => {
             // @todo Guess the text is markdown
             const selectedText = info.selectionText;
             const message: PlainTextMessage = {
-                id: contextMenuId,
+                id: Id.ContextMenu,
             };
             chrome.tabs.sendMessage(tab.id, message);
         }
     }
 });
+
+chrome.runtime.onMessage.addListener(
+    (
+        message: ConvertToPlainRequestMessage,
+        sender: chrome.runtime.MessageSender,
+        sendResponse: ((response: any) => void),
+    ) => {
+        if (message.id === Id.ConvertToPlainText && message.text) {
+            const converted: ConvertToPlainResponseMessage = {
+                text: maildown(message.text),
+            };
+            sendResponse(converted);
+        }
+    },
+);
