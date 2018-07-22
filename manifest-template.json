@@ -1,0 +1,27 @@
+{
+	"manifest_version": 2,
+	"name": "__MSG_extensionName__",
+	"version": "PACKAGE_JSON_VERSION",
+	"description": "__MSG_extensionDescription__",
+	"default_locale": "en",
+	"author": "mtgto",
+	"homepage_url": "https://github.com/mtgto/markdown-to-plain",
+	"icons": {
+		"16": "icon16.png",
+    	"48": "icon48.png",
+        "128": "icon128.png"
+	},
+
+	"permissions": [
+		"activeTab",
+		"contextMenus"
+	],
+	"content_scripts": [{
+		"matches": ["http://*/*", "https://*/*"],
+		"js": ["js/content.js"]
+	}],
+	"background": {
+		"scripts": ["js/background.js"],
+		"persistent": false
+	}
+}

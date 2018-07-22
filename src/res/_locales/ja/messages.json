@@ -1,0 +1,5 @@
+{
+    "extensionName": { "message": "Markdown to Plain" },
+    "extensionDescription": { "message": "Markdown文書からプレーンテキストに変換します"},
+    "contextMenuConvertTitle": { "message": "選択されたMakrdownテキストをプレーンテキストに変換"}
+}
