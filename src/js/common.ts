@@ -20,3 +20,18 @@ export interface ConvertToPlainRequestMessage {
 export interface ConvertToPlainResponseMessage {
     readonly text: string;
 }
+
+export const convertMarkdownToPlain = (markdown: string): Promise<string> =>
+    new Promise((resolve, reject) => {
+        const request: ConvertToPlainRequestMessage = {
+            id: Id.ConvertToPlainText,
+            text: markdown,
+        };
+        chrome.runtime.sendMessage(request, (response: ConvertToPlainResponseMessage) => {
+            if (response.text) {
+                resolve(response.text);
+            } else {
+                reject();
+            }
+        });
+    });

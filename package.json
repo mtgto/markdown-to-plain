@@ -6,6 +6,7 @@
     "build": "npm run build:dev",
     "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
+    "build:license": "yarn licenses generate-disclaimer --silent --production --non-interactive --emoji true > src/res/ACKNOWLEDGEMENT",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "https://github.com/mtgto/markdwon-to-plain",

@@ -1,11 +1,12 @@
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-module.exports = (env) => ({
-    devtool: 'cheap-module-source-map',
+module.exports = env => ({
+    devtool: "cheap-module-source-map",
     entry: {
         content: "./src/js/content.ts",
         background: "./src/js/background.ts",
+        popup: "./src/js/popup.ts",
     },
     output: {
         filename: "[name].js",
@@ -28,8 +29,13 @@ module.exports = (env) => ({
             {
                 from: "manifest-template.json",
                 to: `${__dirname}/dist/${env.mode}/manifest.json`,
-                transform (content, path) {
-                    return content.toString().replace(/PACKAGE_JSON_VERSION/, require("./package.json").version);
+                transform(content, path) {
+                    return content
+                        .toString()
+                        .replace(
+                            /PACKAGE_JSON_VERSION/,
+                            require("./package.json").version,
+                        );
                 },
             },
             {
@@ -39,6 +45,17 @@ module.exports = (env) => ({
         ]),
     ],
     optimization: {
-        minimizer: [new UglifyJsPlugin({})],
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions:
+                    env.mode !== "production"
+                        ? {}
+                        : {
+                              output: {
+                                  comments: /^\**!|@preserve|@license|@cc_on/,
+                              },
+                          },
+            }),
+        ],
     },
 });

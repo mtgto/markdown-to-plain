@@ -1,20 +1,6 @@
-import { contextMenuId, ConvertToPlainRequestMessage, ConvertToPlainResponseMessage, Id, PlainTextMessage } from "./common";
+import { contextMenuId, convertMarkdownToPlain, PlainTextMessage } from "./common";
 
 chrome.runtime.onMessage.addListener((message: PlainTextMessage, sender: chrome.runtime.MessageSender, sendResponse) => {
-    const convertMarkdownToPlain = (markdown: string): Promise<string> =>
-        new Promise((resolve, reject) => {
-            const request: ConvertToPlainRequestMessage = {
-                id: Id.ConvertToPlainText,
-                text: markdown,
-            };
-            chrome.runtime.sendMessage(request, (response: ConvertToPlainResponseMessage) => {
-                if (response.text) {
-                    resolve(response.text);
-                } else {
-                    reject();
-                }
-            });
-        });
     if (message.id === contextMenuId) {
         const element = document.activeElement;
         if (element instanceof HTMLTextAreaElement) {
