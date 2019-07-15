@@ -1,4 +1,3 @@
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = env => ({
@@ -20,7 +19,7 @@ module.exports = env => ({
             {
                 test: /\.ts$/,
                 include: `${__dirname}/src/js`,
-                use: ["awesome-typescript-loader"],
+                use: ["ts-loader"],
             },
         ],
     },
@@ -45,17 +44,6 @@ module.exports = env => ({
         ]),
     ],
     optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                uglifyOptions:
-                    env.mode !== "production"
-                        ? {}
-                        : {
-                              output: {
-                                  comments: /^\**!|@preserve|@license|@cc_on/,
-                              },
-                          },
-            }),
-        ],
+        minimize: env.mode === "production",
     },
 });
