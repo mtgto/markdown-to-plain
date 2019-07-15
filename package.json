@@ -1,6 +1,6 @@
 {
   "name": "markdown-to-plain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An Chrome extension which convert markdown to plain text.",
   "scripts": {
     "build": "npm run build:dev",
