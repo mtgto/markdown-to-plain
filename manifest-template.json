@@ -12,19 +12,8 @@
         "128": "icon128.png"
 	},
 
-	"permissions": [
-		"activeTab",
-		"contextMenus"
-	],
+	"permissions": [],
 	"browser_action": {
 		"default_popup": "popup.html"
-	},
-	"content_scripts": [{
-		"matches": ["http://*/*", "https://*/*"],
-		"js": ["js/content.js"]
-	}],
-	"background": {
-		"scripts": ["js/background.js"],
-		"persistent": false
 	}
 }

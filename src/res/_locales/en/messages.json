@@ -1,5 +1,4 @@
 {
     "extensionName": { "message": "Markdown to Plain" },
-    "extensionDescription": { "message": "Convert markdown to plain text."},
-    "contextMenuConvertTitle": { "message": "Convert selected markdown text to plain text"}
+    "extensionDescription": { "message": "Convert markdown to plain text."}
 }

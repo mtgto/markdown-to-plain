@@ -3,8 +3,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = env => ({
     devtool: "cheap-module-source-map",
     entry: {
-        content: "./src/js/content.ts",
-        background: "./src/js/background.ts",
         popup: "./src/js/popup.ts",
     },
     output: {
